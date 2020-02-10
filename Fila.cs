@@ -42,7 +42,7 @@ namespace ExercArvore
             object x;
 
             if (FilaVazia())
-                throw new Exception("Fila Cheia");
+                throw new Exception("Fila Vazia");
 
             else
             {
