@@ -1,72 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ExercArvore
+public class Fila
 {
-    public class Fila
+    private object[] elements;
+    private int rear, front, tam, cont = 0;
+
+    public Fila(int max)
     {
-        private object[] elements;
-        private int rear, front, tam, cont = 0;
+        tam = max;
+        elements = new object[tam];
+        front = 0;
+        rear = 0;
 
-        public Fila(int max)
+    }
+
+
+    public void Insert(object x)
+    {
+        if (FilaCheia())
+            throw new Exception("Fila Cheia");
+
+        else
         {
-            tam = max;
-            elements = new object[tam];
-            front = 0;
-            rear = 0;
+            elements[rear] = x;
 
-        }
-
-
-        public void Insert(object x)
-        {
-            if (FilaCheia())
-                throw new Exception("Fila Cheia");
-
+            if (rear == tam - 1)
+                rear = 0;
             else
-            {
-                elements[rear] = x;
+                rear++;
 
-                if (rear == tam - 1)
-                    rear = 0;
-                else
-                    rear++;
-
-                cont++;
-            }
+            cont++;
         }
+    }
 
-        public object Remove()
+    public object Remove()
+    {
+        object x;
+
+        if (FilaVazia())
+            throw new Exception("Fila Vazia");
+
+        else
         {
-            object x;
-
-            if (FilaVazia())
-                throw new Exception("Fila Vazia");
-
+            x = elements[front];
+            cont--;
+            if (front > tam)
+            {
+                front = 0;
+            }
             else
-            {
-                x = elements[front];
-                cont--;
-                if (front > tam)
-                {
-                    front = 0;
-                }
-                else
-                    front++;
-            }
-            return x;
+                front++;
         }
+        return x;
+    }
 
-        public bool FilaCheia()
-        {
-            return cont == tam;
-        }
+    public bool FilaCheia()
+    {
+        return cont == tam;
+    }
 
-        public bool FilaVazia()
-        {
+    public bool FilaVazia()
+    {
 
-            return cont == 0;
-        }
+        return cont == 0;
     }
 }
